@@ -4,6 +4,7 @@ from models.models import Db, User, Post
 from forms.forms import SignupForm, LoginForm, NewpostForm
 from os import environ
 from passlib.hash import sha256_crypt
+from datetime import datetime
 
 load_dotenv('.env')
 
@@ -23,13 +24,13 @@ def index():
         session_user = User.query.filter_by(username=session['username']).first()
         posts = Post.query\
             .join(User, User.uid == Post.author)\
-            .add_columns(Post.content, Post.author, Post.pid, User.username) \
+            .add_columns(Post.content, Post.author, Post.pid, Post.created, User.username, User.created) \
             .filter(Post.author == session_user.uid).all()
         return render_template('index.html', title='Home', posts=posts, session_username=session_user.username)
     else:
         all_posts = Post.query \
             .join(User, User.uid == Post.author) \
-            .add_columns(Post.content, Post.author, Post.pid, User.username).all()
+            .add_columns(Post.content, Post.author, Post.pid, Post.created, User.username, User.created).all()
         return render_template('index.html', title='Home', posts=all_posts)
 
 
@@ -68,7 +69,6 @@ def login():
 def logout():
     # Logout
     session.clear()
-    flash('You were successfully logged out')
     return redirect(url_for('index'))
 
 
@@ -86,9 +86,10 @@ def newpost():
 
         # Init content from form request
         content = request.form['content']
+        created = datetime.now()
 
         # Create in DB
-        new_post = Post(author=session_user.uid, content=content)
+        new_post = Post(author=session_user.uid, content=content, created=created)
         Db.session.add(new_post)
         Db.session.commit()
 
@@ -98,7 +99,6 @@ def newpost():
     # If GET
     else:
         return render_template('newpost.html', title='Newpost', form=form)
-
 
 #GET & POST /signup
 @app.route('/signup', methods=['GET', 'POST'])
@@ -112,6 +112,7 @@ def signup():
         # Init credentials from form request
         username = request.form['username']
         password = request.form['password']
+        created = datetime.now()
 
         # Init user from Db query
         existing_user = User.query.filter_by(username=username).first()
@@ -121,7 +122,7 @@ def signup():
             flash('The username already exists. Please pick another one.')
             return redirect(url_for('signup'))
         else:
-            user = User(username=username, password=sha256_crypt.hash(password))
+            user = User(username=username, password=sha256_crypt.hash(password), created=created)
             Db.session.add(user)
             Db.session.commit()
             flash('Congratulations, you are now a registered user!')

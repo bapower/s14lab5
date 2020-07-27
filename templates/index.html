@@ -33,7 +33,10 @@
         <h3>Posts</h3>
         <ul class="number-circle-list">
             {% for p in posts %}
-            <li class="number-circle-list--list-item"><b>Author: {{ p.username }} </b>- {{ p.content }}</li>
+            <li class="number-circle-list--list-item"><b>{{ p.username }} </b>
+                posted on {{ p.created.strftime("%m/%d/%Y at %H:%M:%S") }} -
+                {{ p.content }}
+            </li>
             {% endfor %}
         </ul>
     </div>
