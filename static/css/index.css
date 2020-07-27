@@ -1,0 +1,139 @@
+
+* {
+    border: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    background-color: #3f51b5;
+    padding: 6em 3em 3em 3em;
+    color: #FFF;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    position: relative;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: 400;
+}
+
+h3 {
+    font-size: 1.5em;
+    font-family: sans-serif;
+    line-height: 1.15;
+    margin: 20px;
+    color: #585858;
+}
+
+button, input.form-submit {
+    display:inline-block;
+    padding:0.5em 1.2em;
+    margin:0 0.3em 0.3em 0;
+    border-radius: .5em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family: sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    background-color:#3f51b5;
+    text-align:center;
+    transition: all 0.2s;
+    font-size: 1em;
+}
+button:hover {
+    background-color:#4095c6;
+}
+
+.number-circle-list {
+    list-style: none;
+    padding-left: 1rem;
+    counter-reset: circle-counter;
+}
+
+.number-circle-list--list-item {
+    counter-increment: circle-counter;
+    margin-bottom: 0.25rem;
+}
+
+.number-circle-list--list-item:before {
+    content: counter(circle-counter);
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 0.75rem;
+    line-height: 1.5rem;
+    text-align: center;
+    margin-right: 0.5rem;
+    position: relative;
+    top: -2px;
+    background-color: #72c267;
+    color: white;
+}
+
+.number-circle-list--list-item:last-child {
+    margin-bottom: 0;
+}
+
+ul.flashes {
+    color: #F7F7F7;
+    border-radius: 2px;
+    margin: 10px;
+    padding: 20px;
+    font-size: 18px;
+    line-height: 18px;
+    transition: opacity 1s ease-in-out;
+    background: #72c267;
+}
+
+#posts {
+    margin: 25px 0 0 0;
+}
+
+p {
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: lighter;
+    margin: 5px 20px;
+}
+
+#forms {
+    margin: 50px 0 0 0;
+}
+
+form {
+    margin: 10px 20px;
+}
+
+.form-group {
+    margin: 10px;
+}
+
+.form-group label {
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: lighter;
+}
+
+.form-group input {
+    border-bottom: 3px solid darkblue;
+    margin: 0 0 0 3px;
+    padding: 3px;
+}
+
+.form-group textarea {
+    border: 3px solid darkblue;
+    margin: 10px 0 0 1px;
+    padding: 3px;
+}
+
+.form-error-message {
+    color: red;
+    font-family: sans-serif;
+    font-style: italic;
+    font-size: 15px;
+    font-weight: normal;
+    margin: 5px;
+}
