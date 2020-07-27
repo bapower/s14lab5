@@ -8,3 +8,4 @@ flask-wtf==0.14.3
 mimesis==4.0.0
 flask-heroku==0.1.9
 python-dotenv==0.14.0
+passlib==1.7.2
